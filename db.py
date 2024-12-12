@@ -49,8 +49,7 @@ commands = {
             "bash": "ifconfig",
             "bash_alt": "ip a",
             "bash_extra": "route -n",
-            "bash_another": "netstat -tuln",
-            
+            "bash_another": "netstat -tuln"
         },
         "10": {
             "description": "Logs and command history",
@@ -136,9 +135,33 @@ commands = {
             "description": "List drivers",
             "cmd": "driverquery",
             "powershell": "Get-WmiObject Win32_PnPSignedDriver | select DeviceName,DriverVersion"
-            
         }
-        
-        
+    },
+    "nmap": {
+        "1": {
+            "description": "Scan for open ports",
+            "cmd": "nmap -p 1-65535 <target>",
+            "alt": "nmap -sS -T4 -A -v <target>"
+        },
+        "2": {
+            "description": "Detect operating system",
+            "cmd": "nmap -O <target>",
+            "alt": "nmap -A <target>"
+        }
+    },
+    
+    
+    
+    "test": {
+        "1": {
+            "description": "test",
+            "cmd": "test",
+            "alt": "test"
+        },
+        "2": {
+            "description": "test",
+            "cmd": "nmap -O <target>",
+            "alt": "nmap -A <target>"
+        }
     }
 }
