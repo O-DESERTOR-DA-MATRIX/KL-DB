@@ -32,7 +32,7 @@ def os_menu(os_type):
             print(f"{key}. {value['description']}")
         print("E. Return to main menu")
 
-        choice = input("Enter the number of your choice: ").strip()
+        choice = input("\nEnter the number of your choice: ").strip()
 
         if choice in commands[os_type]:
             show_commands(os_type, choice)
@@ -71,7 +71,7 @@ def show_commands(os_type, choice):
         print("2. Return to the main menu")
         print("3. Exit")
 
-        next_choice = input("Enter your choice: ").strip()
+        next_choice = input("\nEnter your choice: ").strip()
 
         if next_choice == "1":
             os_menu(os_type)
