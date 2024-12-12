@@ -1,8 +1,6 @@
 import sys  # Para adicionar o caminho da área de trabalho ao path
 import os   # Para manipular caminhos de arquivos
 
-
-
 # Importa o banco de dados de comandos
 from db import commands
 
@@ -11,6 +9,8 @@ def main_menu():
         print("\nSelect the operating system:")
         print("1. Linux")
         print("2. Windows")
+        print("3. Nmap")
+        print("4. test")        
         print("E. Exit")
 
         choice = input("Enter your choice: ").strip()
@@ -19,8 +19,13 @@ def main_menu():
             os_menu("linux")
         elif choice == "2":
             os_menu("windows")
+        elif choice == "3":
+            os_menu("nmap")    
+            os_menu("windows")
+        elif choice == "4":
+            os_menu("test")                      
         elif choice.upper() == "E":
-            print("Exiting...")
+            print("Exiting the tool. Goodbye!")
             break
         else:
             print("Invalid choice. Try again.")
@@ -43,26 +48,20 @@ def os_menu(os_type):
 
 def show_commands(os_type, choice):
     command = commands[os_type][choice]
-    print(f"\nSelected command: {command['description']} \n")
+    print(f"\nSelected command: {command['description']}\n")
 
-    # Display commands for the selected OS
-    if os_type == "linux":
-        if 'bash' in command:
-            print(f"🔴 Bash: {command['bash']} \n")
-        if 'bash_alt' in command:
-            print(f"🔴 Bash (alternative): {command['bash_alt']} \n")
-        if 'bash_extra' in command:
-            print(f"🔴 Bash (extra): {command['bash_extra']} \n")
-        if 'bash_another' in command:
-            print(f"🔴 Bash (another): {command['bash_another']} \n")
-        if 'bash_final' in command:
-            print(f"🔴 Bash (final): {command['bash_final']} \n")
-
-    elif os_type == "windows":
-        if 'cmd' in command:
-            print(f"🔵 CMD: {command['cmd']} \n")
-        if 'powershell' in command:
-            print(f"🔵 PowerShell: {command['powershell']} \n")
+    # Display commands dynamically based on the keys present
+    for key, value in command.items():
+        if key == "description":
+            continue
+        if os_type == "linux":
+            print(f"🔴 Bash ({key.capitalize()}): {value} \n")  # Red
+        elif os_type == "windows":
+            print(f"🔵 {key.capitalize()}: {value} \n")  # Blue
+        elif os_type == "nmap":
+            print(f"⚪ {key.capitalize()}: {value} \n")  # White
+        elif os_type == "test":
+            print(f"⚪ {key.capitalize()}: {value} \n")  # White            
 
     # Next action
     while True:
@@ -74,16 +73,16 @@ def show_commands(os_type, choice):
         next_choice = input("\nEnter your choice: ").strip()
 
         if next_choice == "1":
-            os_menu(os_type)
-            break
+            break  # Return to OS menu
         elif next_choice == "2":
             main_menu()
-            break
+            return  # Exit this function to restart the main menu
         elif next_choice == "3":
-            print("Exiting...")
-            break
+            print("Exiting the tool. Goodbye!")
+            sys.exit(0)
         else:
             print("Invalid choice. Try again.")
 
 # Run the tool
-main_menu()
+if __name__ == "__main__":
+    main_menu()
